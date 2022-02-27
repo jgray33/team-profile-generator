@@ -6,13 +6,3 @@
 
 // * `getRole()`&mdash;overridden to return `'Engineer'`
 
-class Engineer extends Employee {
-    constructor(employeeName, id, email, gitHub) {
-    super(employeeName, id, email)
-    this.gitHub = gitHub
-}
-getGithub(){
-    return `${}`
-}}
-
-newEngineer = new Engineer(`${}`)

@@ -1,4 +1,39 @@
-const Inquirer = require("inquirer")
+const inquirer = require("inquirer")
+
+
+inquirer
+  .prompt([
+      {
+          type: "input",
+          name: "managerName",
+          message: "Welcome to the team profile generator, what is the manager's name?",
+      },
+      {
+          type: "input",
+          name: "managerId",
+          message: "What is your employee Id?",
+      }, 
+      {
+          type: "input",
+          name: "managerEmail",
+          message:"what is your email address?"
+      },
+      {
+          type: "input",
+          name: "managerNumber",
+          message: "And what is your office number?",
+      }
+  ])
+  .then((answers) => {
+    console.log(answers)
+  })
+  .catch((error) => {
+    if (error.isTtyError) {
+      // Prompt couldn't be rendered in the current environment
+    } else {
+      // Something else went wrong
+    }
+  });
 
 
 
