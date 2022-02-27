@@ -1,6 +1,7 @@
 const inquirer = require("inquirer")
 
 
+const genericQuestions = () => {
 inquirer
   .prompt([
       {
@@ -25,16 +26,14 @@ inquirer
       }
   ])
   .then((answers) => {
-    console.log(answers)
+    managerAnswers = answers
   })
-  .catch((error) => {
-    if (error.isTtyError) {
-      // Prompt couldn't be rendered in the current environment
-    } else {
-      // Something else went wrong
-    }
-  });
+  
 
+
+
+  
+launchQuestions()
 
 
 
