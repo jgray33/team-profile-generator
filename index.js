@@ -80,21 +80,8 @@ let engineerQuestionSet = [...questionsForAll, ...engineerQuestion];
 let internQuestionSet = [...questionsForAll, ...internQuestion];
 let managerQuestionSet = [...questionsForAll, ...managerQuestion];
 
-// Manager questions, ask if add more
-// If want to add more - launch questions set
-// Add if want to add more
 
-async function askAgain() {
-    const askAgainAnswer = await inquirer.prompt(askAgainQ);
-    if (askAgainAnswer.newTeamMemberChoice === "Engineer") {
-      askEngineer();
-    } else if (askAgainAnswer.newTeamMemberChoice === "Intern") {
-      askIntern();
-    }
-    if (askAgainAnswer.newMember === false){
-        renderCards()
-    }
-  }
+
 
 async function askQuestions() {
   const managerConfirm = await inquirer.prompt(openingQuestion);
@@ -116,6 +103,18 @@ async function askQuestions() {
   }
 }
 
+async function askAgain() {
+    const askAgainAnswer = await inquirer.prompt(askAgainQ);
+    if (askAgainAnswer.newTeamMemberChoice === "Engineer") {
+      askEngineer();
+    } else if (askAgainAnswer.newTeamMemberChoice === "Intern") {
+      askIntern();
+    }
+    if (askAgainAnswer.newMember === false){
+        renderCards()
+    }
+  }
+
 
 async function askEngineer() {
   const askEngineer = await inquirer.prompt(engineerQuestionSet);
@@ -128,6 +127,17 @@ async function askEngineer() {
   teamMembers.push(engineer);
   askAgain();
 }
+async function askIntern() {
+  const askIntern = await inquirer.prompt(internQuestionSet);
+  const intern = new Intern(
+    askIntern.name,
+    askIntern.id,
+    askIntern.email,
+    askEngineer.gitHub
+  );
+  teamMembers.push(intern);
+  askAgain();
+}
 
 function renderCards() {
     console.log(teamMembers);
@@ -135,7 +145,7 @@ function renderCards() {
   
 askQuestions();
 
-//
+
 
 //  function renderCards(teamMembers) {
 //      console.log(teamMembers)
