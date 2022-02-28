@@ -1,28 +1,26 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
-const Employee = require("./lib/Employee")
-const Intern = require("./lib/Intern")
-const Manager = require("./lib/Manager")
-
-
+const Employee = require("./lib/Employee");
+const Intern = require("./lib/Intern");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer")
 
 let teamMembers = [];
 
 let openingQuestion = [
-    {
-        type: "confirm",
-        name: "managerConfirm",
-        message:
-          "Please start with the team manager's details. Press yes to proceed."
-      },
-    ]
+  {
+    type: "confirm",
+    name: "managerConfirm",
+    message:
+      "Please start with the team manager's details. Press yes to proceed.",
+  },
+];
 
 let questionsForAll = [
   {
     type: "input",
     name: "name",
-    message:
-      "Please enter the name of the person you would like to add",
+    message: "Please enter the name of the person you would like to add",
   },
   {
     type: "input",
@@ -34,7 +32,7 @@ let questionsForAll = [
     name: "email",
     message: "Please enter the email address of this person",
   },
-]
+];
 
 let managerQuestion = [
   {
@@ -42,27 +40,25 @@ let managerQuestion = [
     name: "officeNumber",
     message: "And what is this person's office number?",
   },
-  ]
+];
 
-  let engineerQuestion = [
-    {
-      type: "input",
-      name: "engineerGitHub",
-      message: "What is your engineer's gitHub?",
-    },
-  ];
-  
-  let internQuestion = [
-    {
-      type: "input",
-      name: "internSchool",
-      message: "Which school did your intern go to?",
-    },
-    ];
- 
+let engineerQuestion = [
+  {
+    type: "input",
+    name: "gitHub",
+    message: "What is your engineer's gitHub?",
+  },
+];
 
+let internQuestion = [
+  {
+    type: "input",
+    name: "school",
+    message: "Which school did your intern go to?",
+  },
+];
 
-  let askAgain = [
+let askAgainQ = [
   {
     type: "confirm",
     name: "newMember",
@@ -72,69 +68,74 @@ let managerQuestion = [
     type: "list",
     name: "newTeamMemberChoice",
     message: "Which team member would you like to add in?",
-    choices: ["Engineer", "Intern", "Employee"],
+    choices: ["Engineer", "Intern"],
     when: (answers) => answers.newMember === true,
   },
 ];
 
-
-
-
-// const julia = new Employee(`${employeeName}, ${id}, ${email}`)
-// julia.getName()
-
 // Team manager questions
 // Have questions for team manager, employee, and intern.
 // Do an await function depending on the answers to the questions
-let engineerQuestionSet = [...questionsForAll, ...engineerQuestion, ...askAgain];
-let internQuestionSet = [...questionsForAll, ...internQuestion, ...askAgain];
-let managerQuestionSet = [...questionsForAll, ...managerQuestion, ...askAgain]
+let engineerQuestionSet = [...questionsForAll, ...engineerQuestion];
+let internQuestionSet = [...questionsForAll, ...internQuestion];
+let managerQuestionSet = [...questionsForAll, ...managerQuestion];
 
 // Manager questions, ask if add more
 // If want to add more - launch questions set
 // Add if want to add more
 
-async function askQuestions() {
+async function askAgain() {
+    const askAgainAnswer = await inquirer.prompt(askAgainQ);
+    if (askAgainAnswer.newTeamMemberChoice === "Engineer") {
+      askEngineer();
+    } else if (askAgainAnswer.newTeamMemberChoice === "Intern") {
+      askIntern();
+    }
+    if (askAgainAnswer.newMember === false){
+        renderCards()
+    }
+  }
 
-  const managerConfirm  = await inquirer.prompt(openingQuestion);
-  console.log(managerConfirm) 
+async function askQuestions() {
+  const managerConfirm = await inquirer.prompt(openingQuestion);
+  console.log(managerConfirm);
   if (managerConfirm.managerConfirm === true) {
-    //   Ask the manager set of questions 
-      const managerAnswers = await inquirer.prompt(managerQuestionSet)
-   console.log(managerAnswers) 
-//    Create new class with the manager's answers 
-   const manager = new Manager(managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.officeNumber)
-//    Push the class into the team member's array.
-   teamMembers.push(manager)
-//    If selects engineer, go ask the engineer questions 
-   if (managerAnswers.newTeamMemberChoice === "Engineer") {
-       const engineerAnswers = await inquirer.prompt(engineerQuestionSet)
-   } else console.log("gggg")
-} 
-renderCards(teamMembers) 
+    //   Ask the manager set of questions
+    const managerAnswers = await inquirer.prompt(managerQuestionSet);
+    console.log(managerAnswers);
+    //    Create new class with the manager's answers
+    const manager = new Manager(
+      managerAnswers.name,
+      managerAnswers.id,
+      managerAnswers.email,
+      managerAnswers.officeNumber
+    );
+    //    Push the class into the team member's array.
+    teamMembers.push(manager);
+    askAgain();
+  }
+}
+
+
+async function askEngineer() {
+  const askEngineer = await inquirer.prompt(engineerQuestionSet);
+  const engineer = new Engineer(
+    askEngineer.name,
+    askEngineer.id,
+    askEngineer.email,
+    askEngineer.gitHub
+  );
+  teamMembers.push(engineer);
+  askAgain();
 }
 
 function renderCards() {
-    console.log(teamMembers)
-}
-
-
-//   const askAgainAnswer = await inquirer.prompt(askAgain)
-//   if (askAgainAnswer.newTeamMemberChoice === "Engineer") {
-//       const engineerDetails = await inquirer.prompt(engineerQuestionSet);
-//       teamMembers.push(engineerDetails)
-//   } else if ( askAgainAnswer.newTeamMemberChoice === "Intern") {
-//   const internDetails = await inquirer.prompt(internQuestionSet);
-//   teamMembers.push(internDetails) }
-//   else await renderCards(teamMembers) }
-
+    console.log(teamMembers);
+  }
+  
 askQuestions();
 
-
-// 
-
-
-
+//
 
 //  function renderCards(teamMembers) {
 //      console.log(teamMembers)
@@ -154,13 +155,9 @@ askQuestions();
 //           <a href="#" class="card-link">Another link</a>
 //           </div>
 //           </div>`
-     
-     //     fs.appendFile("template.html", output)
 
-// let answers = await promises.
-// teamArr.push(answers)
-// console.log(teamArr)
-// console.log(answers)
+//     fs.appendFile("template.html", output)
+
 
 // await function renderCard(teamArr) {
 //     let output = `
