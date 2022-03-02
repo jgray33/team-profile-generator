@@ -3,14 +3,12 @@ const inquirer = require("inquirer");
 const Employee = require("./lib/Employee");
 const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer")
+const Engineer = require("./lib/Engineer");
+const buildTeam = require("./src/generateTeam");
 
-
-
-let teamMembers = [];
+let teamArr = [];
 
 // Questions ---------------------------------------------------------------------------------
-
 let openingQuestion = [
   {
     type: "confirm",
@@ -81,9 +79,7 @@ let engineerQuestionSet = [...questionsForAll, ...engineerQuestion];
 let internQuestionSet = [...questionsForAll, ...internQuestion];
 let managerQuestionSet = [...questionsForAll, ...managerQuestion];
 
-
 // Async functions ---------------------------------------------------------------------------
-
 async function askQuestions() {
   const managerConfirm = await inquirer.prompt(openingQuestion);
   console.log(managerConfirm);
@@ -99,24 +95,25 @@ async function askQuestions() {
       managerAnswers.officeNumber
     );
     //    Push the class into the team member's array.
-    teamMembers.push(manager);
+    teamArr.push(manager);
     askAgain();
   }
 }
 
+// Asks the user if they want to add another team member, if not, generate the team.
 async function askAgain() {
-    const askAgainAnswer = await inquirer.prompt(askAgainQ);
-    if (askAgainAnswer.newTeamMemberChoice === "Engineer") {
-      askEngineer();
-    } else if (askAgainAnswer.newTeamMemberChoice === "Intern") {
-      askIntern();
-    }
-    if (askAgainAnswer.newMember === false){
-        renderCards()
-    }
+  const askAgainAnswer = await inquirer.prompt(askAgainQ);
+  if (askAgainAnswer.newTeamMemberChoice === "Engineer") {
+    askEngineer();
+  } else if (askAgainAnswer.newTeamMemberChoice === "Intern") {
+    askIntern();
   }
+  if (askAgainAnswer.newMember === false) {
+    generateTeam();
+  }
+}
 
-
+// Asks the user the engineer question set and turn the answer into a class that is pushed into the team array
 async function askEngineer() {
   const askEngineer = await inquirer.prompt(engineerQuestionSet);
   const engineer = new Engineer(
@@ -125,9 +122,11 @@ async function askEngineer() {
     askEngineer.email,
     askEngineer.gitHub
   );
-  teamMembers.push(engineer);
+  teamArr.push(engineer);
   askAgain();
 }
+
+// Asks the user the intern question set and turn the answer into a class that is pushed into the team array
 async function askIntern() {
   const askIntern = await inquirer.prompt(internQuestionSet);
   const intern = new Intern(
@@ -136,83 +135,17 @@ async function askIntern() {
     askIntern.email,
     askEngineer.gitHub
   );
-  teamMembers.push(intern);
+  teamArr.push(intern);
   askAgain();
 }
 
-function renderCards() {
-    console.log(teamMembers);
-  }
-  
+function generateTeam() {
+  fs.writeFileSync("./dist/template.html", buildTeam(teamArr), "utf-8");
+}
+
 askQuestions();
 
 // Notes --------------------------------------------------------------------------------------------------------
-
-
-// Go through the teamMembers array and depending on their class, do different function
-for (let i = 0; i < teamMembers.length; i++) {
-    console.log(teamMembers[i])
-    
-}
-
- function renderManager(managerArray) {
-     console.log(managerArray)
-     let output = `
-             <div class="card" style="width: 18rem;">
-              <div class="card-body">
-          <h5 class="card-title">Name: ${getName()} </h5>
-          <h5 class="card-title"> ${getRole()}</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          </div>
-          <ul class="list-group list-group-flush">
-          <li class="list-group-item>ID: ${getId()}</li>
-          <li class="list-group-item">Email: ${getEmail()}</li>
-          <li class="list-group-item">Office Number:${officeNumber}</li>
-          </ul>
-          <div class="card-body">
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
-          </div>
-          </div>`
-
-    fs.appendFile("template.html", output)
-}
-
-// await function renderCard(teamArr) {
-//     let output = `
-//        <div class="card" style="width: 18rem;">
-//         <div class="card-body">
-//     <h5 class="card-title"> ${teamArr[0]}</h5>
-//     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-//     </div>
-//     <ul class="list-group list-group-flush">
-//     <li class="list-group-item">${teamArr[1]}</li>
-//     <li class="list-group-item">${teamArr[2]}</li>
-//     <li class="list-group-item">A third item</li>
-//     </ul>
-//     <div class="card-body">
-//     <a href="#" class="card-link">Card link</a>
-//     <a href="#" class="card-link">Another link</a>
-//     </div>
-//     </div>`
-
-//     fs.appendFile("template.html", output)
-
-//     }
-
-// renderCard()
-
-//   const generateHTML = ({
-//       managerName,
-//       managerId,
-//       managerEmail,
-//       managerNumber,
-//       addTeamMember
-//   }) =>
-
-// const addTeamMember
-
-// genericQuestions()
 
 // HTML Webpage
 // Summaries for each person
