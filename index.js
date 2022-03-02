@@ -5,7 +5,11 @@ const Intern = require("./lib/Intern");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer")
 
+
+
 let teamMembers = [];
+
+// Questions ---------------------------------------------------------------------------------
 
 let openingQuestion = [
   {
@@ -73,15 +77,12 @@ let askAgainQ = [
   },
 ];
 
-// Team manager questions
-// Have questions for team manager, employee, and intern.
-// Do an await function depending on the answers to the questions
 let engineerQuestionSet = [...questionsForAll, ...engineerQuestion];
 let internQuestionSet = [...questionsForAll, ...internQuestion];
 let managerQuestionSet = [...questionsForAll, ...managerQuestion];
 
 
-
+// Async functions ---------------------------------------------------------------------------
 
 async function askQuestions() {
   const managerConfirm = await inquirer.prompt(openingQuestion);
@@ -145,29 +146,37 @@ function renderCards() {
   
 askQuestions();
 
+// Notes --------------------------------------------------------------------------------------------------------
 
 
-//  function renderCards(teamMembers) {
-//      console.log(teamMembers)
-//      let output = `
-//              <div class="card" style="width: 18rem;">
-//               <div class="card-body">
-//           <h5 class="card-title">${getName()} </h5>
-//           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-//           </div>
-//           <ul class="list-group list-group-flush">
-//           <li class="list-group-item> ${getId()}</li>
-//           <li class="list-group-item">${getEmail()}</li>
-//           <li class="list-group-item">A third item</li>
-//           </ul>
-//           <div class="card-body">
-//           <a href="#" class="card-link">Card link</a>
-//           <a href="#" class="card-link">Another link</a>
-//           </div>
-//           </div>`
+// Go through the teamMembers array and depending on their class, do different function
+for (let i = 0; i < teamMembers.length; i++) {
+    console.log(teamMembers[i])
+    
+}
 
-//     fs.appendFile("template.html", output)
+ function renderManager(managerArray) {
+     console.log(managerArray)
+     let output = `
+             <div class="card" style="width: 18rem;">
+              <div class="card-body">
+          <h5 class="card-title">Name: ${getName()} </h5>
+          <h5 class="card-title"> ${getRole()}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+          <ul class="list-group list-group-flush">
+          <li class="list-group-item>ID: ${getId()}</li>
+          <li class="list-group-item">Email: ${getEmail()}</li>
+          <li class="list-group-item">Office Number:${officeNumber}</li>
+          </ul>
+          <div class="card-body">
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+          </div>
+          </div>`
 
+    fs.appendFile("template.html", output)
+}
 
 // await function renderCard(teamArr) {
 //     let output = `
