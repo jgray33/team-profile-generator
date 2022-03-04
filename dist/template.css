@@ -1,0 +1,41 @@
+
+* {
+    font-family: "lato";
+      }
+  
+  :root {
+    --darkgreen: #648381;
+    --light-green: #e5ebea;
+    --pink: #ddb8a6;
+    
+  }
+
+.card-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: auto;
+
+}
+
+.card{
+    background-color: var(--light-green);
+    padding: 10px;
+    margin: 10px;
+}
+
+.nav-container{
+    display: flex;
+    flex-direction: row;
+    color: white;
+    justify-content: center;
+    align-content: center;
+
+}
+
+.navbar{
+    margin-top: 5%;
+    font-size: 20px;
+
+}

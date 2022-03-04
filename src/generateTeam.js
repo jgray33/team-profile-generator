@@ -11,15 +11,13 @@ function buildTeam(team) {
 // // <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 // // </div>
 // // <ul class="list-group list-group-flush">
-// // <li class="list-group-item>ID: ${getId()}</li>
-// // <li class="list-group-item">Email: ${getEmail()}</li>
+// // <li class="list-group-item>ID: ${manager.id()}</li>
+// // <li class="list-group-item">Email: ${manager.email()}</li>
 // // <li class="list-group-item">Office Number:${
-      managerArray[i].officeNumber
+      managerArray.officeNumber
     }</li>
 // // </ul>
 // // <div class="card-body">
-// // <a href="#" class="card-link">Card link</a>
-// // <a href="#" class="card-link">Another link</a>
 // // </div>
 // // </div>`;
 

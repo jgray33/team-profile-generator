@@ -1,6 +1,6 @@
 const Employee = require("../Employee")
 
-test("Can I initiate employee construct", () => {
+test("Can I initiate employee constructor", () => {
 const emp = new Employee()
 expect(typeof(emp)).toBe("Object")
 })
@@ -10,3 +10,19 @@ test("Can I pass a name in the constructor", ()=> {
     const emp = new Employee(employeeName)
     expect(emp.employeeName).toBe(employeeName)
 })
+
+test("Can I pass an ID in the constructor", () => {
+    const employeeId = "8405203"
+    const id = new Employee(employeeId)
+    expect(id.employeeId).toBe(employeeId)
+})
+
+test("can I pass an Email in the constructor", () => {
+    const email = "julia.gray@hotmail.com"
+    const empEmail = new Employee(email)
+    expect(empEmail.email).toBe(email)
+})
+
+// test("Can I get Employee to return", () => {
+//         expect(employee.role).toBe("Employee")
+// })
