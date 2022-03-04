@@ -1,6 +1,8 @@
 const Engineer = require("../lib/Engineer");
 
+
 function buildTeam(team) {
+    // Manager card
   const createManager = (manager) => {
     return `
     <div id="engineer-card" class="card" style="width: 20rem;">
@@ -14,6 +16,7 @@ function buildTeam(team) {
     </div>
         `
   };
+//   Intern card
   const createIntern = (intern) => {
 return `
 <div class="card" style="width: 20rem;">
@@ -26,6 +29,7 @@ return `
       </div>
     </div>
 `  };
+// Engineer card
   const createEngineer = (engineer) => {
       return `
       <div class="card" style="width: 20rem;">
@@ -51,7 +55,7 @@ return `
     .map((intern) => createIntern(intern)).join();
   fullTeam
     .push(team)
-    .filter((Engineer) => engineer.getRole() == "Engineer")
+    .filter((engineer) => engineer.getRole() == "Engineer")
     .map((engineer) => createEngineer(engineer)).join();
 
   return fullTeam.join();
