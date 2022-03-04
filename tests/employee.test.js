@@ -23,6 +23,7 @@ test("can I pass an Email in the constructor", () => {
     expect(empEmail.email).toBe(email)
 })
 
-// test("Can I get Employee to return", () => {
-//         expect(employee.role).toBe("Employee")
-// })
+test("Will it return Employee as the role", () => {
+        const newEmp = new Employee()
+        expect(newEmp.role).toBe("Employee")
+})
