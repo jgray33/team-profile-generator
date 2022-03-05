@@ -1,3 +1,5 @@
+const { test } = require("picomatch");
+const { terminalWidth } = require("yargs");
 const Engineer = require("../lib/Engineer");
 
 
@@ -45,19 +47,12 @@ return `
   }
 
   const fullTeam = [];
-  fullTeam
-    .push(team)
-    .filter((employee) => employee.getRole() == "Manager")
-    .map((manager) => createManager(manager));
-  fullTeam
-    .push(team)
-    .filter((intern) => intern.getRole() == "Intern")
-    .map((intern) => createIntern(intern)).join();
-  fullTeam
-    .push(team)
-    .filter((engineer) => engineer.getRole() == "Engineer")
-    .map((engineer) => createEngineer(engineer)).join();
-
+  const managers = team.filter((employee) => employee.getRole() == "Manager").map((manager) => createManager(manager))
+  fullTeam.push(managers)
+  const interns = team.filter((intern) => intern.getRole() == "Intern").map((intern) => createIntern(intern)).join()
+  fullTeam.push(interns)
+  const engineers = team.filter((engineer) => engineer.getRole() == "Engineer").map((engineer) => createEngineer(engineer)).join();
+fullTeam.push(engineers)
   return fullTeam.join();
 }
 
