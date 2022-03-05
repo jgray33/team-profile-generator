@@ -1,29 +1,29 @@
-// const Employee = require("./Employee")
+const Employee = require("../lib/Employee")
 
-// test("Can I initiate employee constructor", () => {
-// const emp = new Employee()
-// expect(typeof(emp)).toBe("object")
-// })
 
-// test("Can I pass a name in the constructor", ()=> {
-//     const employeeName = "Julia"
-//     const emp = new Employee(employeeName)
-//     expect(emp.employeeName).toBe(employeeName)
-// })
+describe("Employee class", () => {
+    const employee = new Employee("Julia", 33, "julia.gray@gmail.com", 666)
 
-// test("Can I pass an ID in the constructor", () => {
-//     const employeeId = "8405203"
-//     const id = new Employee(employeeId)
-//     expect(id.employeeId).toBe(employeeId)
-// })
+    describe("GetName function", () => {
+        it("returns the Manger name", () => {
+            expect(employee.getName()).toBe("Julia")
+        })
+    })
 
-// test("can I pass an Email in the constructor", () => {
-//     const email = "julia.gray@hotmail.com"
-//     const empEmail = new Employee(email)
-//     expect(empEmail.email).toBe(email)
-// })
+    describe("Get ID function", () => {
+        it("returns the Employee Id", () => {
+            expect(employee.getId()).toBe(33)
+        })
+    })
 
-// test("Will it return Employee as the role", () => {
-//         const newEmp = new Employee()
-//         expect(newEmp.role).toBe("Employee")
-// })
+    describe("Get email function", () => {
+        it("returns the employee email", () => {
+            expect(employee.getEmail()).toBe("julia.gray@gmail.com")
+        })
+    })
+
+       describe("Get role function", () => {
+        it("returns the Employee's role as Employee", () => {
+            expect(employee.getRole()).toBe("Employee")
+        })
+    })})

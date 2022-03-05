@@ -1,38 +1,35 @@
-// const Engineer = require("./Engineer")
-// const Employee = require("../lib/Employee")
+const Engineer = require("../lib/Engineer")
 
 
-// test("Can I initiate engineer constructor", () => {
-//     const eng = new Engineer()
-//     expect(typeof(eng)).toBe("object")
-// })
+describe("Engineer class", () => {
+    const engineer = new Engineer("Julia", 33, "julia.gray@gmail.com", "jgray33")
 
-// test("Can I pass a name into the constructor", () => {
-//     const employeeName = "Julia"
-//     const eng = new Engineer(employeeName)
-//     expect(eng.employeeName).toBe(employeeName)
-// })
+    describe("GetName function", () => {
+        it("returns the Engineer name", () => {
+            expect(engineer.getName()).toBe("Julia")
+        })
+    })
 
-// test("Can I pass an ID into my construct", ()=> {
-//     const Id = "9t99t"
-//     const engId = new Engineer(Id)
-//     expect(engId.Id).toBe(Id)
-// })
+    describe("Get ID function", () => {
+        it("returns the Engineer Id", () => {
+            expect(engineer.getId()).toBe(33)
+        })
+    })
 
-// test("Can I pass an email into the constructor", () => {
-//     const email = "julia@Engineer.com"
-//     const engEmail = new Engineer(email)
-//     expect(engEmail.email).toBe(email)
+    describe("Get email function", () => {
+        it("returns the engineer email", () => {
+            expect(engineer.getEmail()).toBe("julia.gray@gmail.com")
+        })
+    })
 
-// })
+    describe("Get gitHub function", () => {
+        it("returns the engineer gitHub", () => {
+            expect(engineer.getGithub()).toBe("jgray33")
+        })
+    })
 
-// test("Can I pass an gitHub into the constructor", ()=> {
-//     const gitHub = "jgray33"
-//     const engGitHub = new Engineer(gitHub)
-//     expect(engGitHub.gitHub).toBe(gitHub)
-// })
-
-// test("Will the constructor return Engineer as a role", () => {
-//     const engineer = new Engineer()
-//     expect(engineer.role).toBe("Engineer")
-// })
+       describe("Get role function", () => {
+        it("returns the Engineer's role as Engineer", () => {
+            expect(engineer.getRole()).toBe("Engineer")
+        })
+    })})
