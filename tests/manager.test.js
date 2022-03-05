@@ -1,35 +1,36 @@
 const Manager = require("../lib/Manager")
 
-test("Can I initiate Manager constructor", () => {
-    const manager = new Manager()
-    expect(typeof(manager)).toBe("Object")
-    })
-    
-    test("Can I pass a name in the constructor", ()=> {
-        const managerName = "Julia"
-        const manager = new Manager(managerName)
-        expect(manager.managerName).toBe(managerName)
-    })
-    
-    test("Can I pass an ID in the constructor", () => {
-        const managerId = "8405203"
-        const id = new Manager(managerId)
-        expect(id.managerId).toBe(managerId)
-    })
-    
-    test("can I pass an Email in the constructor", () => {
-        const email = "julia.gray@hotmail.com"
-        const managerEmail = new Manager(email)
-        expect(managerEmail.email).toBe(email)
+
+describe("Manager class", () => {
+    const manager = new Manager("Julia", 33, "julia.gray@gmail.com", 666)
+
+    describe("GetName function", () => {
+        it("returns the Manger name", () => {
+            expect(manager.getName()).toBe("Julia")
+        })
     })
 
-    test("can I pass an office number in the constructor", () => {
-        const officeNumber = "0767685858"
-        const managerNumber = new Manager(officeNumber)
-        expect(managerNumber.officeNumber).toBe(officeNumber)
+    describe("Get ID function", () => {
+        it("returns the Manager Id", () => {
+            expect(manager.getId()).toBe(33)
+        })
     })
-    
-    test("Will it return Manager as the role", () => {
-            const newManager = new Manager()
-            expect(newManager.role).toBe("Manager")
+
+    describe("Get email function", () => {
+        it("returns the manager email", () => {
+            expect(manager.getEmail()).toBe("julia.gray@gmail.com")
+        })
     })
+
+    describe("Get officeNumber function", () => {
+        it("returns the office number", () => {
+            expect(manager.getOfficeNumber()).toBe(666)
+
+        })
+    })
+
+    describe("Get role function", () => {
+        it("returns the Manager's role as Manager", () => {
+            expect(manager.getRole()).toBe("Manager")
+        })
+    })})

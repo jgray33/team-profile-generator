@@ -10,7 +10,7 @@ function buildTeam(team) {
     <div id="engineer-card" class="card" style="width: 20rem;">
       <div class="card-body">
         <h5 class="card-title"> ${manager.employeeName}</h5>
-        <h6 class="card-subtitle mb-2 text-muted"> <b>${manager.role}</b></h6>
+        <h6 class="card-subtitle mb-2 text-muted"> <b> Manager </b></h6>
         <p><b> Employee ID:</b> ${manager.employeeId}</p>
         <p><a href="#">${manager.email}</a></p>
         <p>${manager.officeNumber}</p>
@@ -18,34 +18,34 @@ function buildTeam(team) {
     </div>
         `
   };
-//   Intern card
-  const createIntern = (intern) => {
-return `
-<div class="card" style="width: 20rem;">
-      <div class="card-body">
-        <h5 class="card-title"> ${intern.employeeName} </h5>
-        <h6 class="card-subtitle mb-2 text-muted"><b>${intern.role}</b></h6>
-        <p> <b>Employee ID: </b> ${intern.employeeId}</p>
-        <p><a href="#" class="card-link">${intern.email}</a></p>
-        <p><b>School:</b> ${intern.school}</p>
-      </div>
-    </div>
-`  };
+
 // Engineer card
   const createEngineer = (engineer) => {
       return `
       <div class="card" style="width: 20rem;">
       <div class="card-body">
         <h5 class="card-title"> ${engineer.employeeName} </h5>
-        <h6 class="card-subtitle mb-2 text-muted"><b>${engineer.role}</b></h6>
+        <h6 class="card-subtitle mb-2 text-muted"><b> Engineer </b></h6>
         <p><b> Employee ID: </b> ${engineer.employeeId}</p>
         <p><a href="#" class="card-link">${engineer.email}</a></p>
         <p><a href="#" class="card-link"> ${engineer.gitHub} </a></p>
       </div>
     </div>
-      `
-  }
-
+      `};
+//   Intern card
+  const createIntern = (intern) => {
+    return `
+    <div class="card" style="width: 20rem;">
+          <div class="card-body">
+            <h5 class="card-title"> ${intern.employeeName} </h5>
+            <h6 class="card-subtitle mb-2 text-muted"><b> Intern </b></h6>
+            <p> <b>Employee ID: </b> ${intern.employeeId}</p>
+            <p><a href="#" class="card-link">${intern.email}</a></p>
+            <p><b>School:</b> ${intern.school}</p>
+          </div>
+        </div>
+    `  };
+  
   const fullTeam = [];
   const managers = team.filter((employee) => employee.getRole() == "Manager").map((manager) => createManager(manager))
   fullTeam.push(managers)
@@ -81,7 +81,9 @@ module.exports = (fullTeam) => {
     </nav>
       
       <main> 
+      <div class="card-container">
       ${buildTeam(fullTeam)}
+      </div>
       </main>
       
       `;
