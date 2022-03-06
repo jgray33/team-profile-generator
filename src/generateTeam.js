@@ -1,5 +1,3 @@
-const { test } = require("picomatch");
-const { terminalWidth } = require("yargs");
 const Engineer = require("../lib/Engineer");
 
 
@@ -7,52 +5,70 @@ function buildTeam(team) {
     // Manager card
   const createManager = (manager) => {
     return `
-    <div id="engineer-card" class="card" style="width: 20rem;">
-      <div class="card-body">
-        <h5 class="card-title"> ${manager.employeeName}</h5>
-        <h6 class="card-subtitle mb-2 text-muted"> <b> Manager </b></h6>
-        <p><b> Employee ID:</b> ${manager.employeeId}</p>
-        <p><a href="#">${manager.email}</a></p>
-        <p>${manager.officeNumber}</p>
+    <div class="card-c">
+        <div class="card" style="width: 25rem;">
+          <div class="title-container">
+            <div class="card-body">
+              <h6 class="card-subtitle "><b> ${manager.employeeName} </b></h6>
+            </div>
+            <h5 class="card-title"> Manager </h5>
+          </div>
+          <div class="info-container">
+            <p> Employee ID: ${manager.employeeId}</p>
+            <p><a href="mailto:${manager.email}" class="card-link"> ${manager.email}</a></p>
+            <p> ${manager.officeNumber}</p>
+          </div>
+        </div>
       </div>
-    </div>
         `
   };
 
 // Engineer card
   const createEngineer = (engineer) => {
       return `
-      <div class="card" style="width: 20rem;">
-      <div class="card-body">
-        <h5 class="card-title"> ${engineer.employeeName} </h5>
-        <h6 class="card-subtitle mb-2 text-muted"><b> Engineer </b></h6>
-        <p><b> Employee ID: </b> ${engineer.employeeId}</p>
-        <p><a href="#" class="card-link">${engineer.email}</a></p>
-        <p><a href="#" class="card-link"> ${engineer.gitHub} </a></p>
+      <div class="card-c">
+      <div class="card" style="width: 25rem;">
+        <div class="title-container">
+          <div class="card-body">
+            <h6 class="card-subtitle "><b> ${engineer.employeeName} </b></h6>
+          </div>
+          <h5 class="card-title"> Engineer </h5>
+        </div>
+        <div class="info-container">
+          <p> Employee ID: ${engineer.employeeId}</p>
+          <p><a href="mailto:${engineer.email}" class="card-link"> ${engineer.email}</a></p>
+          <p> GitHib profile:<a href="https://www.github.com/${engineer.gitHub}"> ${engineer.gitHub}</a> </p>
+        </div>
       </div>
     </div>
       `};
 //   Intern card
   const createIntern = (intern) => {
     return `
-    <div class="card" style="width: 20rem;">
-          <div class="card-body">
-            <h5 class="card-title"> ${intern.employeeName} </h5>
-            <h6 class="card-subtitle mb-2 text-muted"><b> Intern </b></h6>
-            <p> <b>Employee ID: </b> ${intern.employeeId}</p>
-            <p><a href="#" class="card-link">${intern.email}</a></p>
-            <p><b>School:</b> ${intern.school}</p>
-          </div>
+    <div class="card-c">
+    <div class="card" style="width: 25rem;">
+      <div class="title-container">
+        <div class="card-body">
+          <h6 class="card-subtitle "><b> ${intern.employeeName} </b></h6>
         </div>
+        <h5 class="card-title"> Intern </h5>
+      </div>
+      <div class="info-container">
+        <p> Employee ID: ${intern.employeeId}</p>
+        <p><a href="mailto:${intern.email}" class="card-link"> ${intern.email}</a></p>
+        <p>School: ${intern.school}</p>
+      </div>
+    </div>
+  </div>
     `  };
   
   const fullTeam = [];
   const managers = team.filter((employee) => employee.getRole() == "Manager").map((manager) => createManager(manager))
   fullTeam.push(managers)
-  const interns = team.filter((intern) => intern.getRole() == "Intern").map((intern) => createIntern(intern)).join()
-  fullTeam.push(interns)
-  const engineers = team.filter((engineer) => engineer.getRole() == "Engineer").map((engineer) => createEngineer(engineer)).join();
+    const engineers = team.filter((engineer) => engineer.getRole() == "Engineer").map((engineer) => createEngineer(engineer)).join();
 fullTeam.push(engineers)
+const interns = team.filter((intern) => intern.getRole() == "Intern").map((intern) => createIntern(intern)).join()
+  fullTeam.push(interns)
   return fullTeam.join();
 }
 

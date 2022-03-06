@@ -1,9 +1,11 @@
 
 * {
     font-family: "lato";
+    font-size: 20px;
       }
   
   :root {
+
     --darkgreen: #648381;
     --light-green: #e5ebea;
     --pink: #ddb8a6;
@@ -19,23 +21,40 @@
 
 }
 
+.title-container{
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: var(--darkgreen);
+    padding: 1%;
+    color: white
+    ;
+}
+
+
 .card{
     background-color: var(--light-green);
     padding: 10px;
     margin: 10px;
+    }
+
+.info-container{
+    background-color: white;   
 }
+
 
 .nav-container{
     display: flex;
     flex-direction: row;
     color: white;
     justify-content: center;
-    align-content: center;
+    margin: auto;
 
 }
 
 .navbar{
-    margin-top: 5%;
-    font-size: 20px;
+    font-weight: bold;
+    font-size: 50px;
+    margin-top: 2%;
 
 }

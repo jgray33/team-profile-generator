@@ -82,11 +82,9 @@ let managerQuestionSet = [...questionsForAll, ...managerQuestion];
 // Async functions ---------------------------------------------------------------------------
 async function askQuestions() {
   const managerConfirm = await inquirer.prompt(openingQuestion);
-  console.log(managerConfirm);
   if (managerConfirm.managerConfirm === true) {
     //   Ask the manager set of questions
     const managerAnswers = await inquirer.prompt(managerQuestionSet);
-    console.log(managerAnswers);
     //    Create new class with the manager's answers
     const manager = new Manager(
       managerAnswers.name,
@@ -133,14 +131,14 @@ async function askIntern() {
     askIntern.name,
     askIntern.id,
     askIntern.email,
-    askEngineer.gitHub
+    askIntern.school
   );
   teamArr.push(intern);
   askAgain();
 }
 
 function generateTeam() {
-  fs.writeFileSync("./dist/template.html", buildTeam(teamArr), "utf-8");
+  fs.writeFileSync("./dist/sample.html", buildTeam(teamArr), "utf-8");
 }
 
 askQuestions();
